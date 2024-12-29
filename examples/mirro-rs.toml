@@ -1,5 +1,5 @@
 [general]
-outfile = "/home/user/example/generated-mirrors" # must not end with trailing slash
+outfile = "~/example/generated-mirrors" # must not end with trailing slash
 # Max number of mirrors to export
 export = 50
 view = "alphabetical" # alphabetical mirror-count

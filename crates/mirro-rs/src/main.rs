@@ -5,6 +5,7 @@ mod direct;
 #[cfg(test)]
 mod test;
 mod tui;
+mod utils;
 
 use std::sync::{Arc, Mutex};
 

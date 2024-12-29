@@ -1,5 +1,5 @@
 general:
-  outfile: /home/user/example/generated-mirrors
+  outfile: ~/example/generated-mirrors
   export: 50
   view: alphabetical
   sort: score

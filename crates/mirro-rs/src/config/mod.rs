@@ -15,6 +15,7 @@ use std::path::PathBuf;
 use crate::{
     cli::{self, ArgConfig, Protocol, SelectionSort, ViewSort},
     tui::view::sort::ExportSort,
+    utils::tilde::expand_tilde,
 };
 
 #[cfg_attr(test, derive(Default))]
@@ -66,6 +67,10 @@ impl Configuration {
         if isos {
             filters.push(Protocol::Isos)
         }
+
+        #[cfg(not(target_os = "windows"))]
+        let outfile = expand_tilde(&outfile).expect("home dir to be available");
+
         Self {
             outfile,
             export,
@@ -120,7 +125,8 @@ impl From<(ArgConfig, ArgConfig)> for Configuration {
         let outfile = args
             .general
             .outfile
-            .unwrap_or_else(|| config.general.outfile.unwrap());
+            .and_then(expand_tilde)
+            .unwrap_or_else(|| config.general.outfile.and_then(expand_tilde).unwrap());
         let export = args
             .general
             .export
